@@ -11,7 +11,7 @@ import json, os, re, shutil, html, datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, 'public')
-SITE = os.environ.get('SITE_URL', 'https://magnetix.am').rstrip('/')
+SITE = os.environ.get('SITE_URL', 'https://magnetix.onrender.com').rstrip('/')
 PHONE = '+374 99 503009'
 PHONE_RAW = '37499503009'
 EMAIL = 'magnetixfurniture@gmail.com'
