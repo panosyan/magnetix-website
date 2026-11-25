@@ -17,7 +17,7 @@ PHONE_RAW = '37499503009'
 EMAIL = 'magnetixfurniture@gmail.com'
 IG = 'https://www.instagram.com/magnetix.am/'
 FB = 'https://www.facebook.com/magnetix.am'
-HIDE = {'928black', '928grey'}  # wrong/unconfirmed codes: keep off the site until GAP confirms
+HIDE = {'928black', '928grey', '8856 B'}  # 8856 B = duplicate of 8856 B black  # wrong/unconfirmed codes: keep off the site until GAP confirms
 
 # ---------------------------------------------------------------- texts
 T = {
