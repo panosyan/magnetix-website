@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://magnetix.am/sitemap.xml

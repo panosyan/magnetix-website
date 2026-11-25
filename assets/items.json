@@ -1,0 +1,677 @@
+[
+ {
+  "folder": "1001 70000",
+  "name": "1001",
+  "slug": "1001",
+  "price": 70000,
+  "stock": 2,
+  "sold": false,
+  "sheet": "1001"
+ },
+ {
+  "folder": "1047A green 30000",
+  "name": "1047A green",
+  "slug": "1047a-green",
+  "price": 30000,
+  "stock": 99,
+  "sold": false,
+  "sheet": "1047A Green"
+ },
+ {
+  "folder": "1047A yellow 30000",
+  "name": "1047A yellow",
+  "slug": "1047a-yellow",
+  "price": 30000,
+  "stock": 99,
+  "sold": false,
+  "sheet": "1047A Yell"
+ },
+ {
+  "folder": "1047agr 30000",
+  "name": "1047agr",
+  "slug": "1047agr",
+  "price": 30000,
+  "stock": 38,
+  "sold": false,
+  "sheet": "1047AGR"
+ },
+ {
+  "folder": "1112 9000",
+  "name": "1112",
+  "slug": "1112",
+  "price": 9000,
+  "stock": 594,
+  "sold": false,
+  "sheet": "1112"
+ },
+ {
+  "folder": "1112 blue 9000",
+  "name": "1112 blue",
+  "slug": "1112-blue",
+  "price": 9000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "1115 12000",
+  "name": "1115",
+  "slug": "1115",
+  "price": 12000,
+  "stock": 288,
+  "sold": false,
+  "sheet": "1115"
+ },
+ {
+  "folder": "1115 orange 12000",
+  "name": "1115 orange",
+  "slug": "1115-orange",
+  "price": 12000,
+  "stock": 90,
+  "sold": false,
+  "sheet": "1115orange"
+ },
+ {
+  "folder": "2357 A black 110000",
+  "name": "2357 A black",
+  "slug": "2357-a-black",
+  "price": 110000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "2357A 90000",
+  "name": "2357A",
+  "slug": "2357a",
+  "price": 90000,
+  "stock": 47,
+  "sold": false,
+  "sheet": "2357A"
+ },
+ {
+  "folder": "2500 36000",
+  "name": "2500",
+  "slug": "2500",
+  "price": 36000,
+  "stock": 43,
+  "sold": false,
+  "sheet": "2500"
+ },
+ {
+  "folder": "2821 21000",
+  "name": "2821",
+  "slug": "2821",
+  "price": 21000,
+  "stock": 10,
+  "sold": false,
+  "sheet": "2821"
+ },
+ {
+  "folder": "2825 22000",
+  "name": "2825",
+  "slug": "2825",
+  "price": 22000,
+  "stock": 204,
+  "sold": false,
+  "sheet": "2825"
+ },
+ {
+  "folder": "2825 grey 22000",
+  "name": "2825 grey",
+  "slug": "2825-grey",
+  "price": 22000,
+  "stock": 27,
+  "sold": false,
+  "sheet": "2825GR"
+ },
+ {
+  "folder": "2825 white 22000",
+  "name": "2825 white",
+  "slug": "2825-white",
+  "price": 22000,
+  "stock": 42,
+  "sold": false,
+  "sheet": "2825WHITE"
+ },
+ {
+  "folder": "326B 30000",
+  "name": "326B",
+  "slug": "326b",
+  "price": 30000,
+  "stock": 48,
+  "sold": false,
+  "sheet": "326B"
+ },
+ {
+  "folder": "6615A 75000",
+  "name": "6615A",
+  "slug": "6615a",
+  "price": 75000,
+  "stock": 32,
+  "sold": false,
+  "sheet": "6615A"
+ },
+ {
+  "folder": "6736A 90000",
+  "name": "6736A",
+  "slug": "6736a",
+  "price": 90000,
+  "stock": 32,
+  "sold": false,
+  "sheet": "6736A"
+ },
+ {
+  "folder": "6802D 50000",
+  "name": "6802D",
+  "slug": "6802d",
+  "price": 50000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "688A 28000",
+  "name": "688A",
+  "slug": "688a",
+  "price": 28000,
+  "stock": 142,
+  "sold": false,
+  "sheet": "688A"
+ },
+ {
+  "folder": "6901A 70000",
+  "name": "6901A",
+  "slug": "6901a",
+  "price": 70000,
+  "stock": 23,
+  "sold": false,
+  "sheet": "6901A"
+ },
+ {
+  "folder": "6909# 65000",
+  "name": "6909#",
+  "slug": "6909",
+  "price": 65000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "6909A 115000",
+  "name": "6909A",
+  "slug": "6909a",
+  "price": 115000,
+  "stock": 9,
+  "sold": false,
+  "sheet": "6909A"
+ },
+ {
+  "folder": "6909Agr 115000",
+  "name": "6909Agr",
+  "slug": "6909agr",
+  "price": 115000,
+  "stock": 11,
+  "sold": false,
+  "sheet": "6909AGR"
+ },
+ {
+  "folder": "6921A 85000",
+  "name": "6921A",
+  "slug": "6921a",
+  "price": 85000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "6935A 110000",
+  "name": "6935A",
+  "slug": "6935a",
+  "price": 110000,
+  "stock": 54,
+  "sold": false,
+  "sheet": "1111 6935А"
+ },
+ {
+  "folder": "6936A 75000",
+  "name": "6936A",
+  "slug": "6936a",
+  "price": 75000,
+  "stock": 17,
+  "sold": false,
+  "sheet": "6936A"
+ },
+ {
+  "folder": "6961 90000",
+  "name": "6961",
+  "slug": "6961",
+  "price": 90000,
+  "stock": 24,
+  "sold": false,
+  "sheet": "6961"
+ },
+ {
+  "folder": "6982A 75000",
+  "name": "6982A",
+  "slug": "6982a",
+  "price": 75000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "8013 16000",
+  "name": "8013",
+  "slug": "8013",
+  "price": 16000,
+  "stock": 42,
+  "sold": false,
+  "sheet": "8013"
+ },
+ {
+  "folder": "8079 30000",
+  "name": "8079",
+  "slug": "8079",
+  "price": 30000,
+  "stock": 8,
+  "sold": false,
+  "sheet": "8079"
+ },
+ {
+  "folder": "8080 27000",
+  "name": "8080",
+  "slug": "8080",
+  "price": 27000,
+  "stock": null,
+  "sold": false,
+  "sheet": "8080"
+ },
+ {
+  "folder": "808C 22000",
+  "name": "808C",
+  "slug": "808c",
+  "price": 22000,
+  "stock": 72,
+  "sold": false,
+  "sheet": "808C"
+ },
+ {
+  "folder": "808C black 20000",
+  "name": "808C black",
+  "slug": "808c-black",
+  "price": 20000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "821B Grey 39000",
+  "name": "821B Grey",
+  "slug": "821b-grey",
+  "price": 39000,
+  "stock": 146,
+  "sold": false,
+  "sheet": "821B Grey"
+ },
+ {
+  "folder": "8856 B 50000",
+  "name": "8856 B",
+  "slug": "8856-b",
+  "price": 50000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "8856 B black 50000",
+  "name": "8856 B black",
+  "slug": "8856-b-black",
+  "price": 50000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "9001 B 15000",
+  "name": "9001 B",
+  "slug": "9001-b",
+  "price": 15000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "9001C 13000",
+  "name": "9001C",
+  "slug": "9001c",
+  "price": 13000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "9005 16000",
+  "name": "9005",
+  "slug": "9005",
+  "price": 16000,
+  "stock": 1,
+  "sold": false,
+  "sheet": "9005"
+ },
+ {
+  "folder": "9021A 95000",
+  "name": "9021A",
+  "slug": "9021a",
+  "price": 95000,
+  "stock": 7,
+  "sold": false,
+  "sheet": "9021A"
+ },
+ {
+  "folder": "9021Abrown 95000",
+  "name": "9021Abrown",
+  "slug": "9021abrown",
+  "price": 95000,
+  "stock": 58,
+  "sold": false,
+  "sheet": "9021Abrown"
+ },
+ {
+  "folder": "928black 43000",
+  "name": "928black",
+  "slug": "928black",
+  "price": 43000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "928brown 43000",
+  "name": "928brown",
+  "slug": "928brown",
+  "price": 43000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "928grey 43000",
+  "name": "928grey",
+  "slug": "928grey",
+  "price": 43000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "A 918 K-1 black 75000",
+  "name": "A 918 K-1 black",
+  "slug": "a-918-k-1-black",
+  "price": 75000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "A203 Grey 90000",
+  "name": "A203 Grey",
+  "slug": "a203-grey",
+  "price": 90000,
+  "stock": 8,
+  "sold": false,
+  "sheet": "A203grey"
+ },
+ {
+  "folder": "A203 white moca 90000",
+  "name": "A203 white moca",
+  "slug": "a203-white-moca",
+  "price": 90000,
+  "stock": 5,
+  "sold": false,
+  "sheet": "A203 white"
+ },
+ {
+  "folder": "A301 BROWN 130000",
+  "name": "A301 BROWN",
+  "slug": "a301-brown",
+  "price": 130000,
+  "stock": 6,
+  "sold": false,
+  "sheet": "A301 brown"
+ },
+ {
+  "folder": "A301 GREY 130000",
+  "name": "A301 GREY",
+  "slug": "a301-grey",
+  "price": 130000,
+  "stock": 7,
+  "sold": false,
+  "sheet": "A301 grey"
+ },
+ {
+  "folder": "A301 Red 130000",
+  "name": "A301 Red",
+  "slug": "a301-red",
+  "price": 130000,
+  "stock": null,
+  "sold": false,
+  "sheet": "A301 red"
+ },
+ {
+  "folder": "A303-1 orange 125000",
+  "name": "A303-1 orange",
+  "slug": "a303-1-orange",
+  "price": 125000,
+  "stock": null,
+  "sold": false,
+  "sheet": "A303-1 orange"
+ },
+ {
+  "folder": "A303-1 red 125000",
+  "name": "A303-1 red",
+  "slug": "a303-1-red",
+  "price": 125000,
+  "stock": 7,
+  "sold": false,
+  "sheet": "A303-1 red"
+ },
+ {
+  "folder": "A310 brown+grey 120000",
+  "name": "A310 brown+grey",
+  "slug": "a310-brown-grey",
+  "price": 120000,
+  "stock": null,
+  "sold": false,
+  "sheet": "A310 brown+grey"
+ },
+ {
+  "folder": "A310 white+blue 120000",
+  "name": "A310 white+blue",
+  "slug": "a310-white-blue",
+  "price": 120000,
+  "stock": null,
+  "sold": false,
+  "sheet": "A310 white+blue"
+ },
+ {
+  "folder": "A3101 khaki 150000",
+  "name": "A3101 khaki",
+  "slug": "a3101-khaki",
+  "price": 150000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "A3903-1 40000",
+  "name": "A3903-1",
+  "slug": "a3903-1",
+  "price": 40000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "A881 75000",
+  "name": "A881",
+  "slug": "a881",
+  "price": 75000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "A918 K-1 grey 75000",
+  "name": "A918 K-1 grey",
+  "slug": "a918-k-1-grey",
+  "price": 75000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "A918K-1 67000",
+  "name": "A918K-1",
+  "slug": "a918k-1",
+  "price": 67000,
+  "stock": 20,
+  "sold": false,
+  "sheet": "A918K-1"
+ },
+ {
+  "folder": "B 80-1 55000",
+  "name": "B 80-1",
+  "slug": "b-80-1",
+  "price": 55000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "B80 55000",
+  "name": "B80",
+  "slug": "b80",
+  "price": 55000,
+  "stock": 35,
+  "sold": false,
+  "sheet": "B80"
+ },
+ {
+  "folder": "C-01 30000",
+  "name": "C-01",
+  "slug": "c-01",
+  "price": 30000,
+  "stock": null,
+  "sold": false,
+  "sheet": "C-01"
+ },
+ {
+  "folder": "C01 black 30000",
+  "name": "C01 black",
+  "slug": "c01-black",
+  "price": 30000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "C02 30000",
+  "name": "C02",
+  "slug": "c02",
+  "price": 30000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "C02 Black 30000",
+  "name": "C02 Black",
+  "slug": "c02-black",
+  "price": 30000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "H-46 39000",
+  "name": "H-46",
+  "slug": "h-46",
+  "price": 39000,
+  "stock": null,
+  "sold": false,
+  "sheet": "H-46 բեժ"
+ },
+ {
+  "folder": "H-46 orange 39000",
+  "name": "H-46 orange",
+  "slug": "h-46-orange",
+  "price": 39000,
+  "stock": null,
+  "sold": false,
+  "sheet": "H-46 orange"
+ },
+ {
+  "folder": "J-6735A 105000",
+  "name": "J-6735A",
+  "slug": "j-6735a",
+  "price": 105000,
+  "stock": null,
+  "sold": false,
+  "sheet": "j-6735A"
+ },
+ {
+  "folder": "J-6939A 127000",
+  "name": "J-6939A",
+  "slug": "j-6939a",
+  "price": 127000,
+  "stock": 2,
+  "sold": false,
+  "sheet": "j-6939A"
+ },
+ {
+  "folder": "J6757A white 75000",
+  "name": "J6757A white",
+  "slug": "j6757a-white",
+  "price": 75000,
+  "stock": null,
+  "sold": false,
+  "sheet": null
+ },
+ {
+  "folder": "J6960A 70000",
+  "name": "J6960A",
+  "slug": "j6960a",
+  "price": 70000,
+  "stock": 14,
+  "sold": false,
+  "sheet": "J6960A"
+ },
+ {
+  "folder": "6802 A grey 85000",
+  "name": "6802 A grey",
+  "slug": "6802-a-grey",
+  "price": 85000,
+  "stock": null,
+  "sold": true,
+  "sheet": null
+ },
+ {
+  "folder": "6802A black 85000",
+  "name": "6802A black",
+  "slug": "6802a-black",
+  "price": 85000,
+  "stock": 0,
+  "sold": true,
+  "sheet": "6802A"
+ },
+ {
+  "folder": "6909BW 65000",
+  "name": "6909BW",
+  "slug": "6909bw",
+  "price": 65000,
+  "stock": 0,
+  "sold": true,
+  "sheet": "6909BW"
+ }
+]
