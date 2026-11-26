@@ -304,7 +304,18 @@ def page(lang, path, title, desc, body, active='', og_img='/og.jpg'):
 </body>
 </html>'''
 
+import zlib
+_V = {}
+def _ver(m):
+    f = m.group(1)
+    if f not in _V:
+        fp = os.path.join(OUT, 'img', f)
+        _V[f] = format(zlib.crc32(open(fp, 'rb').read()) & 0xffff, 'x') if os.path.exists(fp) else ''
+    return f'/img/{f}' + (f'?v={_V[f]}' if _V[f] else '')
+
 def write(path, content):
+    # add ?v=<checksum> to photo links so a replaced photo shows at once (photos are cached for a week)
+    content = re.sub(r'/img/([\w.#-]+/[\w.-]+\.jpg)', _ver, content)
     p = os.path.join(OUT, path.lstrip('/'))
     if p.endswith('/'): p += 'index.html'
     os.makedirs(os.path.dirname(p), exist_ok=True)
