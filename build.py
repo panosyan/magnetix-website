@@ -17,8 +17,7 @@ PHONE_RAW = '37499503009'
 EMAIL = 'magnetixfurniture@gmail.com'
 IG = 'https://www.instagram.com/magnetix.am/'
 FB = 'https://www.facebook.com/magnetix.am'
-SHEET_CSV = os.environ.get('SHEET_CSV', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSyHX8xAUl1c9w0xTGGRTLEaRhSMnY8tcohFePf1wn5HpHqMtuJ7wUzHIqrHRSMN7LYh407XomkYkLI/pub?gid=0&single=true&output=csv')  # published Google Sheet (CSV) with live price/stock/sold out
-HIDE = {'928black', '928grey', '8856 B'}  # 8856 B = duplicate of 8856 B black  # wrong/unconfirmed codes: keep off the site until GAP confirms
+# items.json is edited by the admin app (admin/app.py): price, stock, sold, badges, old_price, hidden, photos order
 
 # ---------------------------------------------------------------- texts
 T = {
@@ -41,7 +40,7 @@ T = {
   f_color='Գույն', f_anycolor='Բոլոր գույները', f_sort='Դասավորել', s_def='Ըստ նախնականի', s_up='Գինը՝ աճման կարգով', s_down='Գինը՝ նվազման կարգով',
   f_instock='Միայն առկաները', f_search='Որոնել ըստ կոդի…', none_found='Այս ընտրությամբ մոդել չգտնվեց։',
   models_n='մոդել',
-  amd='դրամ', instock='Առկա է', few='Վերջին հատերը', ask='Հարցրեք առկայությունը', sold='Վաճառված է',
+  amd='դրամ', instock='Առկա է', few='Վերջին հատերը', ask='Հարցրեք առկայությունը', sold='Վաճառված է', new='Նորույթ', sale='Զեղչ', hot='Թոփ վաճառք',
   model='Մոդել', color='Գույն', price='Գին', category='Տեսակ', availability='Առկայություն',
   order_wa='Պատվիրել WhatsApp-ով', order_call='Զանգել', order_ig='Գրել Instagram-ում',
   wa_msg='Բարև Ձեզ, հետաքրքրում է {m} մոդելը ({p} դրամ)։',
@@ -81,7 +80,7 @@ T = {
   f_color='Цвет', f_anycolor='Все цвета', f_sort='Сортировка', s_def='По умолчанию', s_up='Сначала дешевле', s_down='Сначала дороже',
   f_instock='Только в наличии', f_search='Поиск по коду…', none_found='По этому запросу моделей нет.',
   models_n='моделей',
-  amd='драм', instock='В наличии', few='Последние штуки', ask='Наличие уточняйте', sold='Продано',
+  amd='драм', instock='В наличии', few='Последние штуки', ask='Наличие уточняйте', sold='Продано', new='Новинка', sale='Скидка', hot='Хит продаж',
   model='Модель', color='Цвет', price='Цена', category='Тип', availability='Наличие',
   order_wa='Заказать в WhatsApp', order_call='Позвонить', order_ig='Написать в Instagram',
   wa_msg='Здравствуйте, интересует модель {m} ({p} драм).',
@@ -121,7 +120,7 @@ T = {
   f_color='Colour', f_anycolor='All colours', f_sort='Sort', s_def='Default', s_up='Price: low to high', s_down='Price: high to low',
   f_instock='In stock only', f_search='Search by code…', none_found='No models match this filter.',
   models_n='models',
-  amd='AMD', instock='In stock', few='Last pieces', ask='Ask about stock', sold='Sold out',
+  amd='AMD', instock='In stock', few='Last pieces', ask='Ask about stock', sold='Sold out', new='New arrival', sale='On sale', hot='Hot item',
   model='Model', color='Colour', price='Price', category='Type', availability='Availability',
   order_wa='Order on WhatsApp', order_call='Call', order_ig='Message on Instagram',
   wa_msg='Hello, I am interested in the {m} model ({p} AMD).',
@@ -191,16 +190,18 @@ def description(folder):
 
 items = []
 for it in json.load(open(os.path.join(ROOT, 'assets/items.json'))):
-    if it['name'] in HIDE: continue
+    if it.get('hidden'): continue
     d = os.path.join(OUT, 'img', it['slug'])
-    if not os.path.exists(os.path.join(d, 'semi.jpg')): continue
+    it['photos'] = [p for p in it.get('photos') or [] if os.path.exists(os.path.join(d, p))]
+    if not it['photos']: continue
+    it['badges'] = [b for b in it.get('badges') or [] if b in ('new', 'sale', 'hot')]
     it['title'] = pretty(it['name'])
     it['colors'] = colors_of(it['name'])
     it['base'] = base_of(it['name'])
     it['cat'] = category(it['price'])
     it['desc'], it['feat'] = description(it['folder'])
     st = it['stock']
-    it['status'] = 'sold' if it['sold'] else ('ask' if st is None else ('few' if st <= 5 else 'instock'))
+    it['status'] = 'sold' if it['sold'] or st == 0 else ('ask' if st is None else ('few' if st <= 5 else 'instock'))
     items.append(it)
 ORDER = {'instock': 0, 'few': 1, 'ask': 2, 'sold': 3}
 items.sort(key=lambda i: (ORDER[i['status']] == 3, i['title'].lower()))
@@ -228,14 +229,30 @@ def url(lang, path=''):
 def status_badge(t, s):
     return f'<span class="badge b-{s}">{e(t[s])}</span>'
 
+def sm(it, p):
+    s = p[:-4] + '-sm.jpg'
+    return s if os.path.exists(os.path.join(OUT, 'img', it['slug'], s)) else p
+
+def badges(t, it):
+    b = [k for k in ('new', 'sale', 'hot') if k in it['badges']] if it['status'] != 'sold' else []
+    if it['status'] in ('few', 'sold'): b.append(it['status'])
+    return ''.join(status_badge(t, k) for k in b)
+
+def price_html(t, it):
+    if not it['price']: return ''
+    old = it.get('old_price')
+    old = f'<s>{fmt(old)}</s> ' if old and 'sale' in it['badges'] and old > it['price'] else ''
+    return f'{old}{fmt(it["price"])} {t["amd"]}'
+
 def card(t, lang, it):
     cls = ' is-sold' if it['status'] == 'sold' else ''
-    price = f'{fmt(it["price"])} {t["amd"]}' if it['price'] else ''
+    price = price_html(t, it)
+    ph = it['photos']
+    alt = f'<img loading="lazy" class="alt" src="/img/{it["slug"]}/{sm(it, ph[3])}" alt="" width="480" height="600" aria-hidden="true">' if len(ph) > 3 else ''
     return (f'<a class="card{cls}" href="{url(lang, "chair/" + it["slug"] + "/")}" data-slug="{it["slug"]}" data-cat="{it["cat"]}" data-colors="{" ".join(it["colors"])}" '
             f'data-price="{it["price"] or 0}" data-status="{it["status"]}" data-name="{e(it["title"].lower())}">'
-            f'<div class="card-img"><img loading="lazy" src="/img/{it["slug"]}/semi-sm.jpg" alt="{e(it["title"])}" width="480" height="600">'
-            f'<img loading="lazy" class="alt" src="/img/{it["slug"]}/int-semi-sm.jpg" alt="" width="480" height="600" aria-hidden="true">'
-            f'{status_badge(t, it["status"]) if it["status"] in ("few", "sold") else ""}</div>'
+            f'<div class="card-img"><img loading="lazy" src="/img/{it["slug"]}/{sm(it, ph[0])}" alt="{e(it["title"])}" width="480" height="600">'
+            f'{alt}<span class="badges">{badges(t, it)}</span></div>'
             f'<div class="card-body"><h3>{e(it["title"])}</h3><p class="price">{price}</p></div></a>')
 
 def page(lang, path, title, desc, body, active='', og_img='/og.jpg'):
@@ -283,7 +300,6 @@ def page(lang, path, title, desc, body, active='', og_img='/og.jpg'):
  <div class="wrap copy">© {year} Magnetix Furniture. {e(t['rights'])}</div>
 </footer>
 <a class="fab" href="{wa_link()}" aria-label="WhatsApp">{ICON['wa']}</a>
-<script>window.MX_SHEET={json.dumps(SHEET_CSV)};window.MX_T={json.dumps({k: t[k] for k in ('instock','few','ask','sold','amd')}, ensure_ascii=False)};</script>
 <script src="/site.js" defer></script>
 </body>
 </html>'''
@@ -298,7 +314,7 @@ def write(path, content):
 def home(lang):
     t = T[lang]
     feat = ''.join(card(t, lang, BY_SLUG[s]) for s in FEATURED)
-    hero_imgs = ''.join(f'<img src="/img/{s}/int-semi.jpg" alt="" class="h{k}">' for k, s in enumerate(['a310-white-blue', '6909a', 'a301-brown']) if s in BY_SLUG)
+    hero_imgs = ''.join(f'<img src="/img/{s}/int-semi.jpg" alt="" class="h{k}">' for k, s in enumerate(['a310-white-blue', '6909a', 'a301-brown']) if s in BY_SLUG and 'int-semi.jpg' in BY_SLUG[s]['photos'])
     why = ''.join(f'<div class="why-i"><span class="num">0{k+1}</span><h3>{e(h)}</h3><p>{e(p)}</p></div>' for k, (h, p) in enumerate(t['why']))
     n = len([i for i in items if i['status'] != 'sold'])
     body = f'''
@@ -356,10 +372,9 @@ def catalog(lang):
 
 def chair(lang, it):
     t = T[lang]
-    shots = [('semi', 'w'), ('front', 'w'), ('side', 'w'), ('int-semi', 'i'), ('int-front', 'i'), ('int-side', 'i')]
-    shots = [(s, k) for s, k in shots if os.path.exists(os.path.join(OUT, 'img', it['slug'], s + '.jpg'))]
-    main = ''.join(f'<img src="/img/{it["slug"]}/{s}.jpg" alt="{e(it["title"])}" width="960" height="1200"{" loading=lazy" if n else ""}>' for n, (s, k) in enumerate(shots))
-    thumbs = ''.join(f'<button class="th{" on" if n == 0 else ""}" data-src="/img/{it["slug"]}/{s}.jpg" aria-label="{n+1}"><img loading="lazy" src="/img/{it["slug"]}/{s}.jpg" alt="" width="96" height="120"></button>' for n, (s, k) in enumerate(shots))
+    shots = it['photos']
+    main = ''.join(f'<img src="/img/{it["slug"]}/{s}" alt="{e(it["title"])}" width="960" height="1200"{" loading=lazy" if n else ""}>' for n, s in enumerate(shots))
+    thumbs = ''.join(f'<button class="th{" on" if n == 0 else ""}" aria-label="{n+1}"><img loading="lazy" src="/img/{it["slug"]}/{sm(it, s)}" alt="" width="96" height="120"></button>' for n, s in enumerate(shots))
     colors = ', '.join(t['colors'][c] for c in it['colors']) or '—'
     catname = {'exec': t['f_exec'], 'office': t['f_office'], 'visitor': t['f_visitor']}[it['cat']]
     price = f'{fmt(it["price"])} {t["amd"]}' if it['price'] else '—'
@@ -369,7 +384,7 @@ def chair(lang, it):
     sibs = [i for i in items if i['base'] == it['base'] and i is not it]
     simi = [i for i in items if i['cat'] == it['cat'] and i is not it and i not in sibs and i['status'] != 'sold']
     simi = sorted(simi, key=lambda i: abs((i['price'] or 0) - (it['price'] or 0)))[:4]
-    sib_html = f'<div class="sibs"><h4>{e(t["other_colors"])}</h4><div>' + ''.join(f'<a href="{url(lang, "chair/" + s["slug"] + "/")}" title="{e(s["title"])}"><img src="/img/{s["slug"]}/semi-sm.jpg" alt="{e(s["title"])}" width="72" height="90"></a>' for s in sibs) + '</div></div>' if sibs else ''
+    sib_html = f'<div class="sibs"><h4>{e(t["other_colors"])}</h4><div>' + ''.join(f'<a href="{url(lang, "chair/" + s["slug"] + "/")}" title="{e(s["title"])}"><img src="/img/{s["slug"]}/{sm(s, s["photos"][0])}" alt="{e(s["title"])}" width="72" height="90"></a>' for s in sibs) + '</div></div>' if sibs else ''
     body = f'''
 <section class="sec chair"><div class="wrap">
  <p class="crumbs"><a href="{url(lang, 'catalog/')}">← {e(t['back'])}</a></p>
@@ -378,8 +393,8 @@ def chair(lang, it):
   <div class="info">
    <p class="kicker">{e(catname)}</p>
    <h1>{e(it['title'])}</h1>
-   <p class="big-price" data-slug="{it['slug']}">{price}</p>
-   {status_badge(t, it['status'])}
+   <p class="big-price">{price_html(t, it) or '—'}</p>
+   <p class="badges">{badges(t, it) or status_badge(t, it['status'])}</p>
    {desc}
    <table class="spec"><tr><th>{e(t['model'])}</th><td>{e(it['title'])}</td></tr><tr><th>{e(t['color'])}</th><td>{e(colors)}</td></tr>{feat}
    <tr><th>{e(t['category'])}</th><td>{e(catname)}</td></tr><tr><th>{e(t['availability'])}</th><td id="avail">{e(t[it['status']])}</td></tr></table>
@@ -393,7 +408,7 @@ def chair(lang, it):
 {f'<section class="sec alt"><div class="wrap"><h2>{e(t["similar"])}</h2><div class="grid">' + ''.join(card(t, lang, s) for s in simi) + '</div></div></section>' if simi else ''}'''
     ttl = f'{it["title"]} · {price} · Magnetix Furniture'
     d = (it['desc'] if lang == 'hy' and it['desc'] else f'{it["title"]}: {price}. {t["desc"]}')[:300]
-    write(url(lang, f'chair/{it["slug"]}/'), page(lang, f'chair/{it["slug"]}/', ttl, d, body, 'nav_cat', og_img=f'/img/{it["slug"]}/semi.jpg'))
+    write(url(lang, f'chair/{it["slug"]}/'), page(lang, f'chair/{it["slug"]}/', ttl, d, body, 'nav_cat', og_img=f'/img/{it["slug"]}/{it["photos"][0]}'))
 
 def b2b(lang):
     t = T[lang]
@@ -427,12 +442,10 @@ def main():
     for f in os.listdir(OUT):
         if f == 'img': continue
         p = os.path.join(OUT, f); shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
-    for src, dst in [('static/style.css', 'style.css'), ('static/site.js', 'site.js'), ('assets/magnetix-inventory.pdf', 'magnetix-inventory.pdf')]:
+    # no third-party modules here: Render runs this script on every push
+    for src, dst in [('static/style.css', 'style.css'), ('static/site.js', 'site.js'), ('static/logo-light.png', 'logo-light.png'),
+                     ('static/favicon.png', 'favicon.png'), ('assets/magnetix-inventory.pdf', 'magnetix-inventory.pdf')]:
         shutil.copy(os.path.join(ROOT, src), os.path.join(OUT, dst))
-    from PIL import Image
-    Image.open(os.path.join(ROOT, 'assets/gold-white-magnetix-logo.png')).resize((356, 120), Image.LANCZOS).save(os.path.join(OUT, 'logo-light.png'), optimize=True)
-    ic = Image.open(os.path.join(ROOT, 'assets/gold-white-magnetix-logo.png')).crop((0, 0, 304, 304)).resize((128, 128), Image.LANCZOS)
-    bg = Image.new('RGBA', (128, 128), (14, 14, 14, 255)); bg.alpha_composite(ic); bg.save(os.path.join(OUT, 'favicon.png'))
     for lang in LANGS:
         home(lang); catalog(lang); b2b(lang); contact(lang)
         for it in items: chair(lang, it)

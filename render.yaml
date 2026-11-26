@@ -1,9 +1,13 @@
 services:
+  # public website: build.py turns assets/items.json + public/img into the static pages on every push
   - type: web
     name: magnetix
     runtime: static
-    buildCommand: echo "prebuilt"
+    buildCommand: python3 build.py
     staticPublishPath: ./public
+    buildFilter:
+      ignoredPaths:
+        - admin/**
     headers:
       - path: /img/*
         name: Cache-Control
@@ -11,3 +15,25 @@ services:
       - path: /img/*
         name: Access-Control-Allow-Origin
         value: "*"
+  # admin: password login, edit chairs/photos/badges, CSV + Google Sheet import/export; saves by committing to this repo
+  - type: web
+    name: magnetix-admin
+    runtime: python
+    plan: free
+    rootDir: admin
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 120
+    healthCheckPath: /login
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GITHUB_REPO
+        value: panosyan/magnetix-website
+      - key: SHEET_CSV
+        value: https://docs.google.com/spreadsheets/d/e/2PACX-1vSyHX8xAUl1c9w0xTGGRTLEaRhSMnY8tcohFePf1wn5HpHqMtuJ7wUzHIqrHRSMN7LYh407XomkYkLI/pub?gid=0&single=true&output=csv

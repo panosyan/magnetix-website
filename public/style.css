@@ -69,7 +69,8 @@ h2{font-size:clamp(24px,3.2vw,34px);font-weight:700;margin-bottom:28px}
 .price{color:var(--gold-d);font-weight:700;font-size:17px;margin-top:2px}
 .card.is-sold{opacity:.6}
 .badge{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px}
-.card .badge{position:absolute;top:10px;left:10px;z-index:2}
+.card .badges{position:absolute;top:10px;left:10px;z-index:2;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px)}
+.info .badges{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .b-instock{background:#e5f4e8;color:#1c6b33}.b-few{background:#fff1d6;color:#8a5a00}.b-ask{background:#eee;color:#555}.b-sold{background:#2a2a2a;color:#fff}
 /* why */
 .why{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
@@ -179,3 +180,6 @@ html,body{overflow-x:hidden;max-width:100%}
 .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none}
 .dots i{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.25)}.dots i.on{background:var(--gold-d)}
 @media(max-width:600px){.foot-in{grid-template-columns:minmax(0,1fr)}.foot-in>*{min-width:0}.foot p{overflow-wrap:anywhere}.menu{width:100%;box-sizing:border-box}}
+
+.b-new{background:#1f6f4a;color:#fff}.b-sale{background:#c0392b;color:#fff}.b-hot{background:#e8892b;color:#fff}
+.price s,.big-price s{color:#9a9a9a;font-weight:400;font-size:.8em;margin-right:4px}
