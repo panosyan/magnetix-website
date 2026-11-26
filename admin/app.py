@@ -228,9 +228,19 @@ def status(it):
 def index():
     items = load()
     q = request.args.get('q', '').lower().strip()
-    rows = [it for it in items if not q or q in it['name'].lower() or q in it['slug']]
+    flt = request.args.get('f', '')
+    live = [it for it in items if not it.get('hidden') and it.get('photos')]
+    groups = {'all': items, 'site': live, 'hidden': [it for it in items if it not in live]}
+    for k in ('instock', 'few', 'ask', 'sold'): groups[k] = [it for it in live if status(it)[0] == k]
+    for k in ('new', 'sale', 'hot'): groups[k] = [it for it in live if k in (it.get('badges') or [])]
+    pieces = sum(it.get('stock') or 0 for it in live if status(it)[0] != 'sold')
+    rows = [it for it in groups.get(flt, items) if not q or q in it['name'].lower() or q in it['slug']]
     rows.sort(key=lambda it: (bool(it.get('hidden')), it['name'].lower()))
-    return render_template_string(BASE, title='Chairs', body=INDEX, rows=rows, q=q, status=status, total=len(items), sheet=bool(SHEET_CSV))
+    tiles = [('site', 'On the website', ''), ('instock', 'In stock', 't-instock'), ('few', 'Last pieces (1-5)', 't-few'),
+             ('ask', 'Stock unknown', ''), ('sold', 'Out of stock', 't-sold'), ('new', 'New arrival', 't-new'),
+             ('sale', 'On sale', 't-sale'), ('hot', 'Hot item', 't-hot'), ('hidden', 'Hidden / no photos', '')]
+    return render_template_string(BASE, title='Chairs', body=INDEX, rows=rows, q=q, f=flt, status=status, total=len(items),
+                                  tiles=[(k, l, c, len(groups[k])) for k, l, c in tiles], pieces=pieces, sheet=bool(SHEET_CSV))
 
 @app.route('/img/<slug>/<name>')
 @login_required
@@ -380,6 +390,9 @@ label{display:block;font-weight:600;margin:10px 0 4px}.chk{display:flex;gap:8px;
 .t-new{background:#1f6f4a;color:#fff}.t-sale{background:#c0392b;color:#fff}.t-hot{background:#e8892b;color:#fff}.t-sold{background:#2a2a2a;color:#fff}.t-few{background:#fff1d6;color:#8a5a00}.t-instock{background:#e5f4e8;color:#1c6b33}
 .ph{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.ph figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}.ph figcaption{display:flex;gap:4px;flex-wrap:wrap;padding:6px}.ph form{display:inline}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;display:flex;flex-direction:column;gap:4px}
+.stat b{font-size:26px;line-height:1}.stat.on{outline:3px solid var(--gold)}
 .cover{outline:3px solid var(--gold)}.muted{color:#666;font-size:13px}.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 </style></head><body>
 {% if session.ok %}<header><b>MAGNETIX · admin</b><nav><a href="/">All chairs</a><a href="/new">+ Add chair</a><a href="{{ site if site is defined else 'https://magnetix.onrender.com' }}" target="_blank">Open website ↗</a><a href="/logout">Log out</a></nav></header>{% endif %}
@@ -390,7 +403,10 @@ label{display:block;font-weight:600;margin:10px 0 4px}.chk{display:flex;gap:8px;
 LOGIN = r'''<div class="box" style="max-width:360px;margin:60px auto"><h1>Magnetix admin</h1>
 <form method="post"><label>Password</label><input type="password" name="password" autofocus required><p><button class="btn">Log in</button></p></form></div>'''
 
-INDEX = r'''<h1>Chairs <span class="muted">({{ total }})</span></h1>
+INDEX = r'''<h1>Chairs <span class="muted">({{ total }} models)</span></h1>
+<div class="stats">{% for k, l, c, n in tiles %}<a href="/?f={{ k }}" class="stat{{ ' on' if f == k }}"><b>{{ n }}</b><span class="tag {{ c }}">{{ l }}</span></a>{% endfor %}
+<div class="stat"><b>{{ '{:,}'.format(pieces).replace(',', ' ') }}</b><span class="tag">Pieces in stock (website chairs)</span></div></div>
+{% for k, l, c, n in tiles if k == f %}<p>Showing only: <b>{{ l }}</b> ({{ n }}) · <a href="/">show all</a></p>{% endfor %}
 <div class="box"><div class="tools">
 <a class="btn" href="/export.csv">⬇ Download all as CSV</a>
 <form method="post" action="/import" enctype="multipart/form-data" class="tools" style="margin:0"><input type="hidden" name="_csrf" value="{{ csrf() }}">
