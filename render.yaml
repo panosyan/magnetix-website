@@ -8,3 +8,6 @@ services:
       - path: /img/*
         name: Cache-Control
         value: public, max-age=604800
+      - path: /img/*
+        name: Access-Control-Allow-Origin
+        value: "*"
