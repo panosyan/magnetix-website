@@ -33,3 +33,26 @@
   [q,col,sort,inst].forEach(function(x){x.addEventListener('input',apply);x.addEventListener('change',apply)});
   apply();
 })();
+/* live prices / stock / sold out from the Google Sheet */
+(function(){
+  if(!window.MX_SHEET)return;
+  function parse(t){var rows=[],row=[],f='',q=false;for(var i=0;i<t.length;i++){var c=t[i];if(q){if(c=='"'&&t[i+1]=='"'){f+='"';i++}else if(c=='"')q=false;else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'){row.push(f);rows.push(row);row=[];f=''}else if(c!='\r')f+=c}if(f||row.length){row.push(f);rows.push(row)}return rows}
+  function num(v){v=String(v||'').replace(/[^\d]/g,'');return v?parseInt(v,10):null}
+  var T=window.MX_T||{};
+  fetch(window.MX_SHEET,{cache:'no-store'}).then(function(r){return r.text()}).then(function(txt){
+    var rows=parse(txt),h=rows.shift().map(function(x){return x.trim().toLowerCase()}),data={};
+    var ci=function(k){for(var i=0;i<h.length;i++)if(h[i].indexOf(k)===0)return i;return -1};
+    var iS=ci('code'),iP=ci('price'),iQ=ci('stock'),iX=ci('sold');
+    rows.forEach(function(r){var s=(r[iS]||'').trim();if(!s)return;var p=num(r[iP]),q=String(r[iQ]||'').trim(),x=/^(y|yes|այո|да|x|1|true)/i.test((r[iX]||'').trim());
+      var qn=/^\d[\d\s.,]*$/.test(q)?num(q):null;var st;if(x||qn===0)st='sold';else if(qn!==null)st=qn<=5?'few':'instock';else if(!q)st='ask';else if(/last|few|посл|վերջ/i.test(q))st='few';else if(/sold|прод|վաճառ/i.test(q))st='sold';else if(/ask|уточ|հարց/i.test(q))st='ask';else st='instock';data[s]={p:p,st:st}});
+    var fmt=function(p){return p.toLocaleString('en-US').replace(/,/g,' ')+' '+(T.amd||'AMD')};
+    document.querySelectorAll('.card[data-slug]').forEach(function(c){var d=data[c.dataset.slug];if(!d)return;
+      if(d.p){c.dataset.price=d.p;var pe=c.querySelector('.price');if(pe)pe.textContent=fmt(d.p)}
+      c.dataset.status=d.st;c.classList.toggle('is-sold',d.st==='sold');
+      var b=c.querySelector('.badge');if(b)b.remove();
+      if(d.st==='few'||d.st==='sold'){b=document.createElement('span');b.className='badge b-'+d.st;b.textContent=T[d.st];c.querySelector('.card-img').appendChild(b)}});
+    var bp=document.querySelector('.big-price[data-slug]');
+    if(bp){var d=data[bp.dataset.slug];if(d){if(d.p)bp.textContent=fmt(d.p);var b=document.querySelector('.info>.badge');if(b){b.className='badge b-'+d.st;b.textContent=T[d.st]}var a=document.getElementById('avail');if(a)a.textContent=T[d.st]}}
+    var g=document.getElementById('grid');if(g&&g.dispatchEvent)document.getElementById('instock')&&document.getElementById('instock').dispatchEvent(new Event('change'));
+  }).catch(function(){});
+})();

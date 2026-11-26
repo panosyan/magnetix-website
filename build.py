@@ -17,6 +17,7 @@ PHONE_RAW = '37499503009'
 EMAIL = 'magnetixfurniture@gmail.com'
 IG = 'https://www.instagram.com/magnetix.am/'
 FB = 'https://www.facebook.com/magnetix.am'
+SHEET_CSV = os.environ.get('SHEET_CSV', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSyHX8xAUl1c9w0xTGGRTLEaRhSMnY8tcohFePf1wn5HpHqMtuJ7wUzHIqrHRSMN7LYh407XomkYkLI/pub?gid=0&single=true&output=csv')  # published Google Sheet (CSV) with live price/stock/sold out
 HIDE = {'928black', '928grey', '8856 B'}  # 8856 B = duplicate of 8856 B black  # wrong/unconfirmed codes: keep off the site until GAP confirms
 
 # ---------------------------------------------------------------- texts
@@ -230,7 +231,7 @@ def status_badge(t, s):
 def card(t, lang, it):
     cls = ' is-sold' if it['status'] == 'sold' else ''
     price = f'{fmt(it["price"])} {t["amd"]}' if it['price'] else ''
-    return (f'<a class="card{cls}" href="{url(lang, "chair/" + it["slug"] + "/")}" data-cat="{it["cat"]}" data-colors="{" ".join(it["colors"])}" '
+    return (f'<a class="card{cls}" href="{url(lang, "chair/" + it["slug"] + "/")}" data-slug="{it["slug"]}" data-cat="{it["cat"]}" data-colors="{" ".join(it["colors"])}" '
             f'data-price="{it["price"] or 0}" data-status="{it["status"]}" data-name="{e(it["title"].lower())}">'
             f'<div class="card-img"><img loading="lazy" src="/img/{it["slug"]}/semi-sm.jpg" alt="{e(it["title"])}" width="480" height="600">'
             f'<img loading="lazy" class="alt" src="/img/{it["slug"]}/int-semi-sm.jpg" alt="" width="480" height="600" aria-hidden="true">'
@@ -282,6 +283,7 @@ def page(lang, path, title, desc, body, active='', og_img='/og.jpg'):
  <div class="wrap copy">© {year} Magnetix Furniture. {e(t['rights'])}</div>
 </footer>
 <a class="fab" href="{wa_link()}" aria-label="WhatsApp">{ICON['wa']}</a>
+<script>window.MX_SHEET={json.dumps(SHEET_CSV)};window.MX_T={json.dumps({k: t[k] for k in ('instock','few','ask','sold','amd')}, ensure_ascii=False)};</script>
 <script src="/site.js" defer></script>
 </body>
 </html>'''
@@ -376,11 +378,11 @@ def chair(lang, it):
   <div class="info">
    <p class="kicker">{e(catname)}</p>
    <h1>{e(it['title'])}</h1>
-   <p class="big-price">{price}</p>
+   <p class="big-price" data-slug="{it['slug']}">{price}</p>
    {status_badge(t, it['status'])}
    {desc}
    <table class="spec"><tr><th>{e(t['model'])}</th><td>{e(it['title'])}</td></tr><tr><th>{e(t['color'])}</th><td>{e(colors)}</td></tr>{feat}
-   <tr><th>{e(t['category'])}</th><td>{e(catname)}</td></tr><tr><th>{e(t['availability'])}</th><td>{e(t[it['status']])}</td></tr></table>
+   <tr><th>{e(t['category'])}</th><td>{e(catname)}</td></tr><tr><th>{e(t['availability'])}</th><td id="avail">{e(t[it['status']])}</td></tr></table>
    <div class="btns col"><a class="btn wa" href="{wa_link(msg)}">{ICON['wa']}{e(t['order_wa'])}</a>
    <div class="btns"><a class="btn line" href="tel:+{PHONE_RAW}">{ICON['phone']}{e(t['order_call'])}</a><a class="btn line" href="{IG}">{ICON['ig']}{e(t['order_ig'])}</a></div></div>
    <p class="bulk">📦 {e(t['bulk_note'])} <a href="{url(lang, 'b2b/')}">{e(t['bulk_link'])} →</a></p>
