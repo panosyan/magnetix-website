@@ -356,7 +356,7 @@ def chair(lang, it):
     t = T[lang]
     shots = [('semi', 'w'), ('front', 'w'), ('side', 'w'), ('int-semi', 'i'), ('int-front', 'i'), ('int-side', 'i')]
     shots = [(s, k) for s, k in shots if os.path.exists(os.path.join(OUT, 'img', it['slug'], s + '.jpg'))]
-    main = f'<img id="main" src="/img/{it["slug"]}/{shots[0][0]}.jpg" alt="{e(it["title"])}" width="960" height="1200">'
+    main = ''.join(f'<img src="/img/{it["slug"]}/{s}.jpg" alt="{e(it["title"])}" width="960" height="1200"{" loading=lazy" if n else ""}>' for n, (s, k) in enumerate(shots))
     thumbs = ''.join(f'<button class="th{" on" if n == 0 else ""}" data-src="/img/{it["slug"]}/{s}.jpg" aria-label="{n+1}"><img loading="lazy" src="/img/{it["slug"]}/{s}.jpg" alt="" width="96" height="120"></button>' for n, (s, k) in enumerate(shots))
     colors = ', '.join(t['colors'][c] for c in it['colors']) or '—'
     catname = {'exec': t['f_exec'], 'office': t['f_office'], 'visitor': t['f_visitor']}[it['cat']]
@@ -372,7 +372,7 @@ def chair(lang, it):
 <section class="sec chair"><div class="wrap">
  <p class="crumbs"><a href="{url(lang, 'catalog/')}">← {e(t['back'])}</a></p>
  <div class="chair-in">
-  <div class="gallery"><div class="main">{main}</div><div class="thumbs">{thumbs}</div></div>
+  <div class="gallery"><div class="main"><div class="slides" id="slides">{main}</div><button class="arr prev" aria-label="Previous">‹</button><button class="arr next" aria-label="Next">›</button><span class="dots" id="dots"></span></div><div class="thumbs">{thumbs}</div></div>
   <div class="info">
    <p class="kicker">{e(catname)}</p>
    <h1>{e(it['title'])}</h1>
