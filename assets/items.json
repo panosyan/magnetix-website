@@ -1504,7 +1504,10 @@
   "photos": [
    "semi.jpg",
    "front.jpg",
-   "side.jpg"
+   "side.jpg",
+   "int-semi.jpg",
+   "int-front.jpg",
+   "int-side.jpg"
   ],
   "badges": [
    "new"
@@ -1523,7 +1526,10 @@
   "photos": [
    "semi.jpg",
    "front.jpg",
-   "side.jpg"
+   "side.jpg",
+   "int-semi.jpg",
+   "int-front.jpg",
+   "int-side.jpg"
   ],
   "badges": [
    "new"
@@ -1542,7 +1548,10 @@
   "photos": [
    "semi.jpg",
    "front.jpg",
-   "side.jpg"
+   "side.jpg",
+   "int-semi.jpg",
+   "int-front.jpg",
+   "int-side.jpg"
   ],
   "badges": [
    "new"
