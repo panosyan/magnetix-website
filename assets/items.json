@@ -1477,5 +1477,117 @@
   ],
   "badges": [],
   "old_price": null
+ },
+ {
+  "folder": "1117 20000",
+  "name": "1117",
+  "slug": "1117",
+  "price": 20000,
+  "stock": 18,
+  "sold": false,
+  "sheet": "1117",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "1114 9000",
+  "name": "1114",
+  "slug": "1114",
+  "price": 9000,
+  "stock": 95,
+  "sold": false,
+  "sheet": "1114",
+  "hidden": false,
+  "photos": [
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "1116 22000",
+  "name": "1116",
+  "slug": "1116",
+  "price": 22000,
+  "stock": 78,
+  "sold": false,
+  "sheet": "1116",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "371-1 orange 30000",
+  "name": "371-1 orange",
+  "slug": "371-1-orange",
+  "price": 30000,
+  "stock": 23,
+  "sold": false,
+  "sheet": "371-1 orange",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "003 acrylic 18000",
+  "name": "003 Acrylic chair",
+  "slug": "003",
+  "price": 18000,
+  "stock": 170,
+  "sold": false,
+  "sheet": "003 Acrylic chair",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "GOLD 27000",
+  "name": "GOLD",
+  "slug": "gold",
+  "price": 27000,
+  "stock": 50,
+  "sold": false,
+  "sheet": "GOLD",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
  }
 ]
