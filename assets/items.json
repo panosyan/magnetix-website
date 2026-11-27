@@ -1383,7 +1383,7 @@
   "name": "J6757A white",
   "slug": "j6757a-white",
   "price": 75000,
-  "stock": null,
+  "stock": 7,
   "sold": false,
   "sheet": null,
   "hidden": false,
