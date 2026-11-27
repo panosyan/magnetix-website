@@ -1700,5 +1700,24 @@
    "new"
   ],
   "old_price": null
+ },
+ {
+  "folder": "6005 27000",
+  "name": "6005",
+  "slug": "6005",
+  "price": 27000,
+  "stock": 13,
+  "sold": false,
+  "sheet": "6005",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
  }
 ]
