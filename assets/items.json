@@ -1662,5 +1662,43 @@
    "new"
   ],
   "old_price": null
+ },
+ {
+  "folder": "8013 18000",
+  "name": "8013",
+  "slug": "8013",
+  "price": 18000,
+  "stock": 87,
+  "sold": false,
+  "sheet": "8013",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "6004 28000",
+  "name": "6004",
+  "slug": "6004",
+  "price": 28000,
+  "stock": 4,
+  "sold": false,
+  "sheet": "6004",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
  }
 ]
