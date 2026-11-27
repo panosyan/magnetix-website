@@ -800,7 +800,7 @@
   "stock": 0,
   "sold": false,
   "sheet": "9021A",
-  "hidden": false,
+  "hidden": true,
   "photos": [
    "semi.jpg",
    "front.jpg",
@@ -814,7 +814,7 @@
  },
  {
   "folder": "9021Abrown 95000",
-  "name": "9021Abrown",
+  "name": "9021A Brown",
   "slug": "9021abrown",
   "price": 95000,
   "stock": 43,
