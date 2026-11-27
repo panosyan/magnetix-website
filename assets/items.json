@@ -1083,8 +1083,8 @@
   "name": "A3101 khaki",
   "slug": "a3101-khaki",
   "price": 150000,
-  "stock": null,
-  "sold": false,
+  "stock": 0,
+  "sold": true,
   "sheet": null,
   "hidden": false,
   "photos": [
