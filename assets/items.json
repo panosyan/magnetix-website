@@ -1624,5 +1624,42 @@
    "new"
   ],
   "old_price": null
+ },
+ {
+  "folder": "6909 grey 65000",
+  "name": "6909 grey",
+  "slug": "6909-grey",
+  "price": 65000,
+  "stock": 31,
+  "sold": false,
+  "sheet": "6909 grey",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "9005 grey 17000",
+  "name": "9005 grey",
+  "slug": "9005-grey",
+  "price": 17000,
+  "stock": 58,
+  "sold": false,
+  "sheet": "9005 grey",
+  "hidden": false,
+  "photos": [
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
  }
 ]
