@@ -1521,6 +1521,7 @@
   "sheet": "1114",
   "hidden": false,
   "photos": [
+   "semi.jpg",
    "front.jpg",
    "side.jpg"
   ],
@@ -1597,7 +1598,27 @@
   "hidden": false,
   "photos": [
    "semi.jpg",
-   "front.jpg"
+   "front.jpg",
+   "side.jpg"
+  ],
+  "badges": [
+   "new"
+  ],
+  "old_price": null
+ },
+ {
+  "folder": "BUBBLE 140000",
+  "name": "BUBBLE",
+  "slug": "bubble",
+  "price": 140000,
+  "stock": 9,
+  "sold": false,
+  "sheet": "BUBBLE",
+  "hidden": false,
+  "photos": [
+   "semi.jpg",
+   "front.jpg",
+   "side.jpg"
   ],
   "badges": [
    "new"
